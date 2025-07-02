@@ -1,6 +1,5 @@
 *.kcpps
 praw.ini
-responses.json
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
