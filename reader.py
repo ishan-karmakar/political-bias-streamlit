@@ -14,21 +14,19 @@ df["submission.created_utc"] = df["submission.created_utc"].apply(
 )
 
 st.set_page_config(layout="wide")
-st.title("Ratings and Upvotes of Reddit Posts over Time")
+st.title("Political Bias of Reddit r/news over Time")
 
 fig = subplots.make_subplots(specs=[[{"secondary_y": True}]])
 fig.add_trace(
-    pgo.Scatter(x=df["submission.created_utc"], y=df["rating"], name="Ratings"),
+    pgo.Scatter(
+        x=df["submission.created_utc"],
+        y=df["rating.label"],
+        name="Ratings",
+        mode="markers",
+    ),
     secondary_y=False,
 )
-fig.add_trace(
-    pgo.Scatter(
-        x=df["submission.created_utc"], y=df["submission.score"], name="Upvotes"
-    ),
-    secondary_y=True,
-)
 fig.update_xaxes(title_text="Time")
-fig.update_yaxes(range=(-50, 50), secondary_y=False)
 
 points = st.plotly_chart(fig, on_select="rerun")["selection"]["points"]
 points = [datetime.date.fromisoformat(p["x"]) for p in points]
@@ -37,11 +35,11 @@ if len(points):
     df = df.loc[df["submission.created_utc"].isin(points)]
 
 st.dataframe(
-    df[["rating", "submission.title", "response"]],
+    df[["submission.title", "rating.label", "rating.score"]],
     hide_index=True,
     column_config={
-        "rating": "Rating",
         "submission.title": "Title",
-        "response": "LLM Response",
+        "rating.label": "Predicted Alignment",
+        "rating.score": "Alignment Confidence",
     },
 )
