@@ -14,7 +14,7 @@ df["submission.created_utc"] = df["submission.created_utc"].apply(
 )
 
 st.set_page_config(layout="wide")
-st.title("Test Title")
+st.title("Ratings and Upvotes of Reddit Posts over Time")
 
 fig = subplots.make_subplots(specs=[[{"secondary_y": True}]])
 fig.add_trace(
@@ -27,7 +27,6 @@ fig.add_trace(
     ),
     secondary_y=True,
 )
-fig.update_layout(title_text="Ratings and Upvotes of Reddit Posts over Time")
 fig.update_xaxes(title_text="Time")
 fig.update_yaxes(range=(-50, 50), secondary_y=False)
 
