@@ -1,4 +1,4 @@
-# Streamlit LLM
+# Political Bias Model
 This is a project that aims to analyze news posts from a social media source (in this case Reddit), and identify the political alignment of them in order to identify trends.
 
 # Example Result
