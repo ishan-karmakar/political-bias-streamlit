@@ -6,7 +6,15 @@ The Streamlit app is available [here](https://ishan-karmakar-streamlit-llm-reade
 ![Streamlit App Picture](example.png)
 
 # Technologies
-This project is made with Python, and uses the [PRAW](https://github.com/praw-dev/praw) API to get the news posts from r/news. To identify the political alignment, the project interfaces with [KoboldCpp](https://github.com/LostRuins/koboldcpp) (running Meta Llama 3 8B Instruct) to get responses from the LLM. The prompt, response, and post information is stored in a file that is used by `reader.py` later. To show the information in a nice UI, `reader.py` is a [Streamlit](https://streamlit.io/) app that displays the ratings over a bar graph and allows selections to see the exact prompt and response.
+This project is made with Python, and uses the [PRAW](https://github.com/praw-dev/praw) API to get the news posts from r/news. To identify the political alignment, the project interfaces with a [Political Bias Model](https://huggingface.co/matous-volf/political-leaning-politics). The submission information and political bias is stored in a file that is used by the Streamlit website later.
 
-# Known Limitations
-Despite my best efforts, the LLM seems to be unreliable with the ratings it gives back. For example, it may rate a heavily conservative post as neutral, or rate a neutral post as extremely liberal. There seems to be no rhyme or reason to this, but it would most likely be solved by using a dedicated political alignment model (text to number) instead of using a text to text model and extracting the number from it.
+# How to Use
+## Collecting new data
+```bash
+$ python3 main.py
+```
+
+## Running the Streamlit app
+```bash
+$ python3 -m streamlit run reader.py
+```
